@@ -17,3 +17,5 @@ Imports:
     dplyr,
     magrittr,
     openxlsx
+URL: https://github.com/srcGrog/srcvars
+BugReports: https://github.com/srcGrog/srcvars/issues
