@@ -11,15 +11,16 @@
 ### Autochecker
 
 Contact details:
-- [ ] Primary email address provided
-- [ ] Phone numbers provided
+- [ ] Email1 valid and populated (Inscope records only)
+- [ ] Phone1 valid and populated (Inscope records only)
 - [ ] Name checks OK
 - [ ] Email checks OK
 - [ ] Phone checks OK
 
 Majors:
-- [ ] E308A/B_MAJFLAG variables populated for inscope records OK
-- [ ] E308A/B_MAJFLAG has valid entries (i.e., only "Course" or "Major") OK
+- [ ] E308A/B_MAJFLAG populated for inscope records OK
+- [ ] E308B_MAJFLAG populated for double degree records OK
+- [ ] Valid values ("Course" or "Major") provided for E308A/B_MAJFLAG OK
 
 Other:
 - [ ] Expected number of records OK
@@ -34,10 +35,10 @@ Other:
 
 Majors checks:
 - [ ] Valid ASCED code in MAJ* variables OK
-- [ ] MAJ*TEXT variables do not contain course names OK
-- [ ] E308A/B_MAJFLAG has valid entries (i.e., only "Course" or "Major") OK
+- [ ] MAJ*TEXT not populated with E308 (Course name) OK
+- [ ] Valid E308A/B_MAJFLAG ("Course" or "Major") OK
 - [ ] MAJ*TEXT variables are propercased OK
-- [ ] No duplicate ASCED codes across MAJ* fields OK
+- [ ] No duplicate ASCED codes across MAJ* OK
 - [ ] All majors are in the majors lookup OK
 - [ ] If E308A/B_MAJFLAG = "Course", MAJ* and MAJ*TEXT variables *not* populated OK
 - [ ] If E308A/B_MAJFLAG = "Major" and institution not doing student supplied majors, MAJ* and MAJ*TEXT variables *are* populated OK
