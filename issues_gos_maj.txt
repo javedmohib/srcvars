@@ -1,0 +1,64 @@
+**Majors file**
+
+## Research
+
+### File preparation
+- [ ] File copied to Original
+- [ ] File name standardised
+- [ ] Comments provided and attached to the file
+- [ ] File prepared for autochecker
+
+### Autochecker
+
+Contact details:
+- [ ] Primary email address provided
+- [ ] Phone numbers provided
+- [ ] Name checks OK
+- [ ] Email checks OK
+- [ ] Phone checks OK
+
+Majors:
+- [ ] E308A/B_MAJFLAG variables populated for inscope records OK
+- [ ] E308A/B_MAJFLAG has valid entries (i.e., only "Course" or "Major") OK
+
+Other:
+- [ ] Expected number of records OK
+- [ ] Graduate status OK
+- [ ] Variable discrepancies OK
+- [ ] Completion dates OK
+- [ ] Record counts OK
+- [ ] Upload Comparison OK
+- [ ] File passed autochecker
+
+## Data
+
+Majors checks:
+- [ ] Valid ASCED code in MAJ* variables OK
+- [ ] MAJ*TEXT variables do not contain course names OK
+- [ ] E308A/B_MAJFLAG has valid entries (i.e., only "Course" or "Major") OK
+- [ ] MAJ*TEXT variables are propercased OK
+- [ ] No duplicate ASCED codes across MAJ* fields OK
+- [ ] All majors are in the majors lookup OK
+- [ ] If E308A/B_MAJFLAG = "Course", MAJ* and MAJ*TEXT variables *not* populated OK
+- [ ] If E308A/B_MAJFLAG = "Major" and institution not doing student supplied majors, MAJ* and MAJ*TEXT variables *are* populated OK
+- [ ] Distribution of majors looks good
+
+Unit tests:
+- [ ] Duplicate tests
+- [ ] Length checks
+- [ ] Value checks
+- [ ] Base checks
+- [ ] HEIMS checks
+- [ ] Course checks
+- [ ] Detailed Unit Tests OK
+
+Syntax checks:
+- [ ] Inscope count looks reasonable based on previous year
+- [ ] No email missort check
+- [ ] No records deleted or added
+- [ ] Differences between returned and original file OK
+
+
+------------------------
+- [ ] Passed
+------------------------
