@@ -7,10 +7,10 @@
 lkp_var(var)
 }
 \arguments{
-\item{var}{A GOS variable name}
+\item{var}{A QILT variable name}
 }
 \value{
-The definition of a variable, values and labels
+The definition of a variable, its values and labels
 }
 \description{
 Sample varaibles, its definition and values
