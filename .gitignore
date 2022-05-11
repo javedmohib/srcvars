@@ -1,5 +1,13 @@
-.Rproj.user
 .Rhistory
-.Rdata
-.httr-oauth
-.DS_Store
+.RData
+.Rproj.user
+archive
+checks
+data
+output
+.*.sw[op]
+*~
+~*
+README.html
+*.docx
+docs
