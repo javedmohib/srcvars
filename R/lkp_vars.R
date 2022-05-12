@@ -25,11 +25,8 @@ lkp_var <- function(var) {
 
   colnames(pop_spec_var) <-  tolower(colnames(pop_spec_var))
   colnames(pop_spec_val) <-  tolower(colnames(pop_spec_val))
-  # pop_spec_var$variable <- tolower(pop_spec_var$variable)
-  # pop_spec_val$variable <- tolower(pop_spec_val$variable)
-  #
+
   colnames(op_spec_var) <-  tolower(colnames(op_spec_var))
-  # op_spec_var$variable <- tolower(op_spec_var$variable)
 
   if (var %in% tolower(pop_spec_var$variable)) {
 
@@ -41,12 +38,6 @@ lkp_var <- function(var) {
       filter(tolower(variable) %in% {{var}}) %>%
       select(value, label)
 
-    # temp_df <- dplyr::left_join(var_def, var_val, by = "variable")
-    # colnames(temp_df) <- c("Variable", "Variable Definition", "Valid Values", "Value Labels")
-    #
-    # if (nrow(temp_df) > 1) {
-    #   temp_df [2:nrow(temp_df), c(1, 2)] <- ""
-    # }
     var_info <- list(
       Variable = as.list(var_def),
       Value = var_val
