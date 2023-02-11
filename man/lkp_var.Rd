@@ -2,7 +2,7 @@
 % Please edit documentation in R/lkp_vars.R
 \name{lkp_var}
 \alias{lkp_var}
-\title{Sample varaibles, its definition and values}
+\title{Sample variables, its definition and values}
 \usage{
 lkp_var(var)
 }
@@ -13,8 +13,8 @@ lkp_var(var)
 The definition of a variable, its values and labels
 }
 \description{
-Sample varaibles, its definition and values
+Sample variables, its definition and values
 }
 \examples{
-lkp_var("DOMINT")
+lkp_var("e329")
 }
