@@ -1,0 +1,79 @@
+---
+title: "lkp_vars"
+author: "Javed Mohib"
+format: html
+editor: visual
+---
+
+## **Introduction**
+
+The **`lkp_var`** function is used to look up the definition, values, and labels of a QILT variable. This is particularly useful when working with survey data where it is important to understand the meaning and possible values of each variable.
+
+# **Usage**
+
+The **`lkp_var`** function takes a single argument, the QILT variable name, and returns a list of two elements:
+
+-   **`Variable`**: A tibble with the variable name, definition, and format.
+
+-   **`Value`**: A tibble with the possible values and their corresponding labels.
+
+# **Example**
+
+Here are a few examples of how to use the **`lkp_var`** function:
+
+```{r}
+# Look up the definition and values for the variable "e329"
+var_info <- lkp_var("e329")
+
+# Access the definition of the variable
+var_info$Variable
+#> # A tibble: 1 x 3
+#>   variable  label                  format      
+#>   <chr>     <chr>                  <chr>       
+#> 1 e329      Field of study         categorical
+
+# Access the possible values and their labels
+var_info$Value
+#> # A tibble: 10 x 2
+#>    value label                                                                                                          
+#>    <chr> <chr>                                                                                                          
+#>  1 01    Architecture and Building                                                                                      
+#>  2 02    Business and Management                                                                                         
+#>  3 03    Education                                                                                                        
+#>  4 04    Engineering and Related Technologies                                                                             
+#>  5 05    Health                                                                                                           
+#>  6 06    Information and Communication Technologies                                                                       
+#>  7 07    Law and Legal Studies                                                                                            
+#>  8 08    Science                                                                                                          
+#>  9 09    Society and Culture                                                                                             
+#> 10 10    Other                                                                                                            
+
+```
+
+```{r}
+# Look up the definition and values for the variable "en1"
+var_info <- lkp_var("en1")
+
+# Access the definition of the variable
+var_info$Variable
+#> # A tibble: 1 x 3
+#>   variable  `Variable Definition` format 
+#>   <chr>     <chr>                 <chr>  
+#> 1 en1      English proficiency    categorical
+
+# Access the possible values and their labels
+var_info$Value
+#> # A tibble: 5 x 2
+#>   value label                               
+#>   <chr> <chr>                               
+#> 1 01    Non-English speaking background    
+#> 2 02    English-speaking background only   
+#> 3 03    Both English and non-English       
+#> 4 04    Not stated/inadequately described 
+#> 5 99    Not applicable                     
+
+```
+
+# **Conclusion**
+
+The **`lkp_var`** function is a useful tool for exploring the meaning and values of QILT variables. Whether you are working with survey data or just need a quick reference, this function can help you quickly get the information you need.
