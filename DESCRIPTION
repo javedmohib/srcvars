@@ -1,6 +1,6 @@
 Package: srcvars
 Title: Gives definition and labels of QILT variables
-Version: 0.0.0.9001
+Version: 0.2.1.9000
 Authors@R: 
     person(given = "Javed",
            family = "Mohib",
@@ -12,7 +12,7 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 Imports: 
     dplyr,
     glue,
@@ -22,3 +22,6 @@ Imports:
     tibble
 URL: https://github.com/javedmohib/srcvars
 BugReports: https://github.com/javedmohib/srcvars/issues
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
