@@ -1,0 +1,44 @@
+project:
+  name: My project
+  code: 9999
+  author: Your Name
+
+dependencies:
+  - testdat
+  - tibble
+  - dplyr
+  - tidyr
+  - magrittr
+  - stringr
+  - glue
+  - rvest
+  - purrr
+  - openxlsx
+
+options:
+  java.parameters: "-Xmx10G"
+  scipen: 999
+
+constants:
+  CONSTR: "driver={SQL Server Native Client 11.0};Server=dpa-sql.srcentre.local;serverspn=MSSQLsvc/dpa-sql.srcentre.local;DATABASE=META;TRUSTED_CONNECTION=YES;"
+  A_LOGICAL: true
+  A_DOUBLE: 2019
+  A_STRING: "Hello"
+  A_STRING_NUM: "2019"
+  A_VECTOR: [1, 2, 3, 4]
+  A_NAMED_LIST:
+    ITEM_1: 1
+    ITEM_2: 2
+
+paths:
+  Z_PATH: "Z:/"
+  CLI_PATH: "{Z_PATH}/Consulting/Jobs/A-K/Department of Education and Training (Cth)/"
+  QILT_PATH: "{CLI_PATH}/QILT/"
+
+  SES_OUTPUTS: "{QILT_PATH}/SES/2504 SES 2020/10. Outputs/"
+  SES_SAMPLE: "{QILT_PATH}/SES/2504 SES 2020/5. Sample/"
+  SES_OUT_SPEC: "{SES_OUTPUTS}/Data files/Specs/SES 2020 Master Output Spec.xlsx"
+  SES_DAT: "{SES_OUTPUTS}/Syntax/data/2.6 final_data.rds"
+  SES_DAT_TIMESERIES: "{SES_OUTPUTS}/Syntax/data/2.7 final_data_timeseries.rds"
+  SES_POP_PATH: "{SES_SAMPLE}/Syntax/output/SES_2012-{2020}_Master_Pop.rds"
+  SES_POP_SPEC: "{SES_SAMPLE}/2. Sample specs and design/SES 2020 Population File Spec.xlsx"
