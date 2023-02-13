@@ -15,6 +15,3 @@ The definition of a variable, its values and labels
 \description{
 Sample variables, its definition and values
 }
-\examples{
-lkp_var("e329")
-}
