@@ -6,7 +6,7 @@
 \usage{
 find_files(
   folder_path,
-  subfolder_path = "",
+  subfolder_path,
   file_name,
   file_extension,
   match_all = TRUE,
@@ -24,7 +24,7 @@ find_files(
 
 \item{match_all}{TRUE if all the values in file_name must be there in the output file.}
 
-\item{strict}{If TRUE only gives results when values in subfolder_path match}
+\item{strict}{If TRUE only gives results when all values in subfolder_path match}
 }
 \value{
 
