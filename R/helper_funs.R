@@ -11,7 +11,8 @@
 #' @export
 #' @import dplyr
 #' @import magrittr
-#' @examples
+#' @examples eval = FALSE
+#' \dontrun{sample_emails (df, n = 10)}
 sample_emails <- function(df, ..., n = 10) {
   df %>%
     filter(!E402 %in% c(NA, ""), !EMAIL1 %in% c(NA, "")) %>%
@@ -25,7 +26,8 @@ sample_emails <- function(df, ..., n = 10) {
 #' @return
 #' @export
 #' @import stringr
-#' @example
+#' @example eval = FALSE
+#' paste_pathr()
 paste_pathr <- function() {
 
   if (str_count(str_replace_all(readClipboard(), "\\\\", "/"), "\"") == 2) { # checking if the path is copied as a path
