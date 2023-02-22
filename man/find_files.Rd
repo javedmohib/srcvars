@@ -2,36 +2,41 @@
 % Please edit documentation in R/find_files.R
 \name{find_files}
 \alias{find_files}
-\title{Title Find a file in a folder}
+\title{To find a file in QILT project folders}
 \usage{
 find_files(
-  folder_path,
-  subfolder_path,
-  file_name,
-  file_extension,
-  match_all = TRUE,
-  strict = FALSE
+  project,
+  year,
+  drive = "",
+  subfolder_path = "",
+  file_name = "",
+  file_extension = "",
+  match_all_name = TRUE,
+  match_all_path = FALSE
 )
 }
 \arguments{
-\item{folder_path}{Path to the folder in which the file exists}
+\item{project}{Specify the QILT project (GOS, SES, ESS, GOS-L)}
 
-\item{subfolder_path}{Sub-folder name in any order}
+\item{year}{Specify the collection year}
 
-\item{file_name}{A string from the name of the file}
+\item{subfolder_path}{Sub-folder name of the file path in any order}
+
+\item{file_name}{One or more keywords from the name of the file}
 
 \item{file_extension}{File extension for example xlsx or txt}
 
-\item{match_all}{TRUE if all the values in file_name must be there in the output file.}
+\item{match_all_name}{TRUE if all the values in file_name must be there in the output file.}
 
-\item{strict}{If TRUE only gives results when all values in subfolder_path match}
+\item{match_all_path}{If TRUE only gives results when all values in subfolder_path match}
 }
 \value{
 
 }
 \description{
-Title Find a file in a folder
+To find a file in QILT project folders
 }
 \examples{
-find_files(folder_path = "K:/QILT/GOS/2023", subfolder_path = c("sample", "feb"), file_extension = "xlsx", file_name = c("Spec", "custom"), match_all = TRUE, strict = TRUE)
+eval=FALSE
+\dontrun{find_files(project = "GOS", year = "2023", subfolder_path = c("sample", "feb"), file_name = c("Spec", "sample"), file_extension = "xlsx", match_all_name = TRUE, match_all_path = TRUE)}
 }

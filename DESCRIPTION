@@ -1,6 +1,6 @@
 Package: srcvars
 Title: Gives definition and labels of QILT variables
-Version: 0.3.1.9002
+Version: 0.3.3.9002
 Authors@R: 
     person(given = "Javed",
            family = "Mohib",

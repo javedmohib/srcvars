@@ -16,5 +16,6 @@ The definition of a variable, its values and labels
 Sample variables, its definition and values
 }
 \examples{
-lkp_var("e329")
+eval = FALSE
+\dontrun{lkp_var("e329")}
 }

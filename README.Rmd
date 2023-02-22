@@ -1,2 +1,2 @@
-# Some helper functions I started creating to learn package development in R
+Some helper functions I started creating to learn package development in R
 
