@@ -6,8 +6,8 @@
 #' @importFrom tibble as_tibble
 #' @importFrom dplyr filter select left_join
 #' @import magrittr
-#' @examples
-#' lkp_var("e329")
+#' @examples eval = FALSE
+#' \dontrun{lkp_var("e329")}
 
 
 lkp_var <- function(var) {
