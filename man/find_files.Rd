@@ -20,6 +20,8 @@ find_files(
 
 \item{year}{Specify the collection year}
 
+\item{drive}{Enter the drive to search for (K or Z)}
+
 \item{subfolder_path}{Sub-folder name of the file path in any order}
 
 \item{file_name}{One or more keywords from the name of the file}
@@ -37,6 +39,5 @@ find_files(
 To find a file in QILT project folders
 }
 \examples{
-eval=FALSE
 \dontrun{find_files(project = "GOS", year = "2023", subfolder_path = c("sample", "feb"), file_name = c("Spec", "sample"), file_extension = "xlsx", match_all_name = TRUE, match_all_path = TRUE)}
 }
