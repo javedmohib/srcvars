@@ -12,16 +12,16 @@
 #'@examples
 #' \dontrun{find_files(project = "GOS", year = "2023", subfolder_path = c("sample", "feb"), file_name = c("Spec", "sample"), file_extension = "xlsx", match_all_name = TRUE, match_all_path = TRUE)}
 
-  find_files <- function(project, year, drive = "", subfolder_path = "", file_name = "", file_extension = "", match_all_name = TRUE, match_all_path = FALSE) {
+find_files <- function(project, year, drive = "", subfolder_path = "", file_name = "", file_extension = "", match_all_name = TRUE, match_all_path = FALSE) {
   if (tolower(project) == "gosl") project <- "GOS-L"
   if (tolower(drive) == "k") {
     folder_paths <- glue::glue("K:/QILT/{project}/{year}")
   } else if (tolower(drive) == "z") {
-    folder_paths <- glue::glue("//srcentre.local/drives/z/Consulting/Jobs/QILT/{project}/{year}")
-  } else {
+    folder_paths <- glue::glue("z:/Consulting/Jobs/QILT/{project}/{year}")
+  } else {1
     folder_paths <- c(
       glue::glue("K:/QILT/{project}/{year}"),
-      glue::glue("//srcentre.local/drives/z/Consulting/Jobs/QILT/{project}/{year}")
+      glue::glue("z:/Consulting/Jobs/QILT/{project}/{year}")
     )
   }
 
@@ -32,10 +32,10 @@
 
     for (file in all_files) {
       if (!grepl("^[\\.\\$~]", file) && # remove the files that start with "., ~, $"  (i.e. hidden files)
-        grepl(paste0(".", file_extension), file, ignore.case = TRUE) && # select only those with desired extension
-        ((match_all_name && all(sapply(file_name, function(arg) grepl(arg, basename(file), ignore.case = TRUE)))) || # Runs when match_all_name = TRUE
+          grepl(paste0(".", file_extension), file, ignore.case = TRUE) && # select only those with desired extension
+          ((match_all_name && all(sapply(file_name, function(arg) grepl(arg, basename(file), ignore.case = TRUE)))) || # Runs when match_all_name = TRUE
 
-          (!match_all_name && any(sapply(file_name, function(arg) grepl(arg, basename(file), ignore.case = TRUE)))))) { # Runs when match_all_name = FALSE
+           (!match_all_name && any(sapply(file_name, function(arg) grepl(arg, basename(file), ignore.case = TRUE)))))) { # Runs when match_all_name = FALSE
 
         if (all(subfolder_path == "")) {
           matching_files <- c(matching_files, file.path(folder_path, file))
@@ -43,7 +43,7 @@
           matching_subfolder_path <- sub("/[^/]+$", "", file.path(folder_path, file))
 
           if ((!match_all_path && any(sapply(subfolder_path, function(arg) grepl(arg, matching_subfolder_path, ignore.case = TRUE)))) ||
-            (match_all_path && all(sapply(subfolder_path, function(arg) grepl(arg, matching_subfolder_path, ignore.case = TRUE))))) {
+              (match_all_path && all(sapply(subfolder_path, function(arg) grepl(arg, matching_subfolder_path, ignore.case = TRUE))))) {
             matching_files <- c(matching_files, file.path(folder_path, file))
           }
         }
