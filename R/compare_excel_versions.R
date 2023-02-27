@@ -8,9 +8,7 @@
 #' @export
 #' @import openxlsx
 #' @examples
-#' \dontrun old_version_path <- "K:/QILT/GOS/2023/Overall/10. Outputs/Data files/Specs/archive/GOS 2022 Master Output Spec.xlsx"
-# new_version_path <- "K:/QILT/GOS/2023/Overall/10. Outputs/Data files/Specs/GOS 2023 Master Output Spec.xlsx"
-# compare_excel_files (old_version_path, new_version_path, output_file = "misc/example.xlsx", OVER_WRITE = TRUE)
+#' \dontrun compare_excel_files ("K:/QILT/GOS/2023/Overall/10. Outputs/Data files/Specs/archive/GOS 2022 Master Output Spec.xlsx", "K:/QILT/GOS/2023/Overall/10. Outputs/Data files/Specs/GOS 2023 Master Output Spec.xlsx", output_file = "example.xlsx", OVER_WRITE = TRUE)
 compare_excel_files <- function(old_version_path, new_version_path, output_file, OVER_WRITE = TRUE) {
   # Read in all sheet names from the old Excel version
   old_sheet_names <- getSheetNames(old_version_path)
