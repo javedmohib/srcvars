@@ -33,15 +33,18 @@ find_files <- function(project, year, drive = "", subfolder_path = "", file_name
     for (file in all_files) {
       if (!grepl("^[\\.\\$~]", file) && # remove the files that start with "., ~, $"  (i.e. hidden files)
           grepl(paste0(".", file_extension), file, ignore.case = TRUE) && # select only those with desired extension
-          ((match_all_name && all(sapply(file_name, function(arg) grepl(arg, basename(file), ignore.case = TRUE)))) || # Runs when match_all_name = TRUE
-
-           (!match_all_name && any(sapply(file_name, function(arg) grepl(arg, basename(file), ignore.case = TRUE)))))) { # Runs when match_all_name = FALSE
-
+          # Runs when match_all_name = TRUE. Check if all file_name are in name of the file (basename(file) gives file name)
+          ((match_all_name && all(sapply(file_name, function(arg) grepl(arg, basename(file), ignore.case = TRUE)))) ||
+           # Runs when match_all_name = FALSE. Check if any of file_name argument is in name of the file
+           (!match_all_name && any(sapply(file_name, function(arg) grepl(arg, basename(file), ignore.case = TRUE)))))) {
+          # Put file in matching_files if subfolder_path is empty
         if (all(subfolder_path == "")) {
           matching_files <- c(matching_files, file.path(folder_path, file))
+          # If subfolder_path is not empty filter to files with subfolder_path values in the path
         } else {
+          # Remove the file name to filter to directory path
           matching_subfolder_path <- sub("/[^/]+$", "", file.path(folder_path, file))
-
+            # Filter to files having all or any subfolder_path based on value of match_all_path
           if ((!match_all_path && any(sapply(subfolder_path, function(arg) grepl(arg, matching_subfolder_path, ignore.case = TRUE)))) ||
               (match_all_path && all(sapply(subfolder_path, function(arg) grepl(arg, matching_subfolder_path, ignore.case = TRUE))))) {
             matching_files <- c(matching_files, file.path(folder_path, file))
@@ -52,31 +55,41 @@ find_files <- function(project, year, drive = "", subfolder_path = "", file_name
   }
 
   while (TRUE) {
+    # check if there are no matching files in the folder_paths
     if (length(matching_files) == 0) {
       cat(paste0("There is no such file in the folder: ", folder_paths, "\n\n"))
       break
     }
 
+    # print the list of matching files
     cat("The following files were found:\n")
     for (i in 1:length(matching_files)) {
       cat(paste0(i, ": ", matching_files[i], "\n"))
     }
 
+    # prompt user to select a file to open
     file_index <- readline("Which file do you want to open? (Enter 0 to escape) ")
     while (TRUE) {
       if (file_index == "") {
+        # check for invalid input (empty or non-numeric)
         cat("Invalid input. Enter a number between 1 and", length(matching_files), "or 0 to escape: ")
         file_index <- readline("")
       } else if (as.numeric(file_index) == "0") {
         return()
       } else {
+        # check for out of range input
         file_index <- as.numeric(file_index)
         if (file_index < 0 || file_index > length(matching_files)) {
           cat("Invalid input. Enter a number between 1 and", length(matching_files), "or 0 to escape: ")
           file_index <- readline("")
         } else {
+
+          # open the selected file using shell.exec() function
           shell.exec(matching_files[file_index])
+
+          # prompt user to select another file or escape
           file_index <- readline("Which file do you want to open? (Enter 0 to escape) ")
+
         }
       }
     }
