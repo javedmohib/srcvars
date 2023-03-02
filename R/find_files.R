@@ -29,11 +29,12 @@ find_files <- function(project, year, drive = "", subfolder_path = "", file_name
 
   for (folder_path in folder_paths) {
     all_files <- dir(folder_path, recursive = TRUE)
+    all_files <- all_files[!grepl("^[\\.\\$~]", basename(all_files)) & # remove the files that start with "., ~, $"  (i.e. hidden files)
+                             grepl(paste0(".", file_extension), all_files, ignore.case = TRUE)] #& # select only those with desired extension
+                             #!grepl("zip$", all_files)] # to remove zip files
 
     for (file in all_files) {
-      if (!grepl("^[\\.\\$~]", file) && # remove the files that start with "., ~, $"  (i.e. hidden files)
-          grepl(paste0(".", file_extension), file, ignore.case = TRUE) && # select only those with desired extension
-          # Runs when match_all_name = TRUE. Check if all file_name are in name of the file (basename(file) gives file name)
+      if (# Runs when match_all_name = TRUE. Check if all file_name are in name of the file (basename(file) gives file name)
           ((match_all_name && all(sapply(file_name, function(arg) grepl(arg, basename(file), ignore.case = TRUE)))) ||
            # Runs when match_all_name = FALSE. Check if any of file_name argument is in name of the file
            (!match_all_name && any(sapply(file_name, function(arg) grepl(arg, basename(file), ignore.case = TRUE)))))) {
