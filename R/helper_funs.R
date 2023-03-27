@@ -43,19 +43,3 @@ paste_pathr <- function() {
 }
 
 
-#' QILT TCSI Website Functions
-#' @param elm A TCSI element
-#' @return Opens TCSI website for the element
-#' @export
-#' @importFrom stringr str_sub
-#' @import glue
-#' @examples
-#' tcsi_web("470")
-tcsi_web <- function(elm) {
-  if (str_sub(elm, 1, 1) %in% c("e", "E")) {
-    elm <- str_sub(elm, 2, nchar(elm))
-  }
-  url <- glue::glue("https://www.tcsisupport.gov.au/element/", elm)
-  utils::browseURL(url, browser = getOption("browser"),
-                   encodeIfNeeded = FALSE)
-}
