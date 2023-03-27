@@ -3,8 +3,8 @@
 #' @param year Specify the collection year
 #' @param drive Enter the drive to search for (K or Z)
 #' @param subfolder_path Sub-folder name of the file path in any order
-#' @param file_extension File extension for example xlsx or txt
 #' @param file_name One or more keywords from the name of the file
+#' @param file_extension File extension for example xlsx or txt
 #' @param match_all_name TRUE if all the values in file_name must be there in the output file.
 #' @param match_all_path If TRUE only gives results when all values in subfolder_path match
 #' @return
@@ -30,7 +30,7 @@ find_files <- function(project, year, drive = "", subfolder_path = "", file_name
   for (folder_path in folder_paths) {
     all_files <- dir(folder_path, recursive = TRUE)
     all_files <- all_files[!grepl("^[\\.\\$~]", basename(all_files)) & # remove the files that start with "., ~, $"  (i.e. hidden files)
-                             grepl(paste0(".", file_extension), all_files, ignore.case = TRUE)] #& # select only those with desired extension
+                             grepl(file_extension, tools::file_ext(all_files), ignore.case = TRUE)] #& # select only those with desired extension
                              #!grepl("zip$", all_files)] # to remove zip files
 
     for (file in all_files) {
