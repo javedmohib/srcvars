@@ -1,10 +1,11 @@
-#' QILT TCSI functions
-#' These functions provide format checks for TCSI variables
-#' @param elm
+#' @title QILT TCSI functions
+#' @description These functions provide format checks for TCSI variables
+#' @param elm - A TCSI element
 #' @import stringr
 #' @import glue
 #' @return
 #' @export
+
 
 tcsi_var <- function(elm) {
 
@@ -16,16 +17,18 @@ tcsi_var <- function(elm) {
     stop(getOption("srcqilt.name"), ": `", elm, "` is not a valid tcsi element",
          call. = FALSE)
   } else{
+    WD <- "C:/Users/jmohib/MISC Work/Package Development/Helper Packages/srcvars"
+    tcsi_variables <- openxlsx::read.xlsx(str_glue("{WD}/data/1_tcsi_spec.xlsx"))
+    tcsi_values <-  openxlsx::read.xlsx(str_glue("{WD}/data/1_tcsi_spec.xlsx"), sheet = 2)
 
-    tcsi_spec <- openxlsx::read.xlsx("lookup/tcsi_spec.xlsx")
-
-    var_def <- tcsi_spec %>%
+    var_def <- tcsi_variables %>%
       filter(tolower(element) %in% {{elm}}) %>%
       select(element, "Variable Definition" = label, type, width)
 
-    var_val <- tcsi_spec %>%
+    var_val <- tcsi_values %>%
       filter(tolower(element) %in% {{elm}}) %>%
-      select(label, description)
+      select(value, label) %>%
+      as_tibble()
 
     var_info <- list(
       Variable = as.list(var_def),
@@ -42,7 +45,8 @@ is_tcsi <- function(elm) {
   if (!stringr::str_sub(elm, 1, 1) %in% c("e", "E")) {
     elm <- paste0("e", elm)
   }
-  tcsi_vars <- openxlsx::read.xlsx("data/1 tcsi_spec.xlsx")
+  WD <- "C:/Users/jmohib/MISC Work/Package Development/Helper Packages/srcvars"
+  tcsi_vars <- openxlsx::read.xlsx(str_glue("{WD}/data/1_tcsi_spec.xlsx"))
   tolower(elm) %in% tcsi_vars$element
 }
 
@@ -57,7 +61,7 @@ tcsi_web <- function(elm) {
     stop(getOption("srcqilt.name"), ": `", elm, "` is not a valid tcsi element",
          call. = FALSE)
   } else{
-    url <- glue::glue("https://www.tcsisupport.gov.au/element/", elm)
+    url <- str_glue("https://www.tcsisupport.gov.au/element/", elm)
     utils::browseURL(url, browser = getOption("browser"),
                      encodeIfNeeded = FALSE)
   }

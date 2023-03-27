@@ -6,6 +6,7 @@
 #' @importFrom tibble as_tibble
 #' @importFrom dplyr filter select left_join
 #' @import magrittr
+#' @import stringr
 #' @examples eval = FALSE
 #' \dontrun{lkp_var("e329")}
 
@@ -24,8 +25,8 @@ lkp_var <- function(var) {
   mos_var <- openxlsx::read.xlsx("K:/QILT/GOS/2023/Overall/10. Outputs/Data files/Specs/GOS 2023 Master Output Spec.xlsx") %>% rename_all(tolower)
   mos_val <- openxlsx::read.xlsx("K:/QILT/GOS/2023/Overall/10. Outputs/Data files/Specs/GOS 2023 Master Output Spec.xlsx", sheet = 2) %>% rename_all(tolower)
 
-  response_var <-  openxlsx::read.xlsx("lookup/qilt_vars_misc.xlsx", sheet = "Variable")
-  response_val <-  openxlsx::read.xlsx("lookup/qilt_vars_misc.xlsx", sheet = "Value")
+  response_var <-  openxlsx::read.xlsx(str_glue("{WD}/lookup/qilt_vars_misc.xlsx"), sheet = "Variable")
+  response_val <-  openxlsx::read.xlsx(str_glue("{WD}/lookup/qilt_vars_misc.xlsx"), sheet = "Value")
 
   if (var %in% tolower(pop_spec_var$variable)) {
 
