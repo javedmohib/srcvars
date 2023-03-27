@@ -2,15 +2,18 @@
 % Please edit documentation in R/tcsi_funs.R
 \name{tcsi_var}
 \alias{tcsi_var}
-\title{QILT TCSI functions
-These functions provide format checks for TCSI variables}
+\title{QILT TCSI functions}
 \usage{
 tcsi_var(elm)
+}
+\arguments{
+\item{elm}{\itemize{
+\item A TCSI element
+}}
 }
 \value{
 
 }
 \description{
-QILT TCSI functions
 These functions provide format checks for TCSI variables
 }
