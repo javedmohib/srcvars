@@ -26,10 +26,6 @@ lkp_var <- function(var) {
 
   response_var <-  openxlsx::read.xlsx("lookup/qilt_vars_misc.xlsx", sheet = "Variable")
   response_val <-  openxlsx::read.xlsx("lookup/qilt_vars_misc.xlsx", sheet = "Value")
-  # colnames(pop_spec_var) <-  tolower(colnames(pop_spec_var))
-  # colnames(pop_spec_val) <-  tolower(colnames(pop_spec_val))
-  #
-  # colnames(op_spec_var) <-  tolower(colnames(op_spec_var))
 
   if (var %in% tolower(pop_spec_var$variable)) {
 
