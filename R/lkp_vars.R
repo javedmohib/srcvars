@@ -11,56 +11,45 @@
 #' \dontrun{lkp_var("e329")}
 
 
-lkp_var <- function(var) {
+lkp_var <- function(var, project = "GOS", tolerance = 0.5) {
+
+  # Function to find similar variables
+  find_similar_variables <- function(variable, variables) {
+    similar_vars <- variables[stringdist::stringdist(variables, variable, method = "jaccard") < tolerance]  # Adjust the tolerance as needed
+    return(as_tibble(similar_vars))
+  }
+
+  project <- toupper(project)
+  if(project == "GOSL") project <- "GOS-L"
 
   label <-  value <-  variable <-  variable.label <- NULL
+  FILE_PATH <- file.path(system.file(package = "srcvars"))
+  FILE_PATH <- glue::glue("{FILE_PATH}/extdata/{project}_variable_lookup.xlsx")
+
+
 
   ifelse(suppressWarnings(is.na(as.numeric(var))), var <- tolower(var), var <- paste0("e", var))
 
-  pop_spec_var <- openxlsx::read.xlsx("K:/QILT/GOS/2023/Nov/5. Sample/2. Sample specs and design/GOS 2023 Population File Spec.xlsx") %>% rename_all(tolower)
-  pop_spec_val <- openxlsx::read.xlsx("K:/QILT/GOS/2023/Nov/5. Sample/2. Sample specs and design/GOS 2023 Population File Spec.xlsx", sheet = 2) %>% rename_all(tolower)
+  variables <- openxlsx::read.xlsx(FILE_PATH, sheet = "Variables") %>%
+    mutate(Variable = tolower(Variable)) %>%
+    rename_all(tolower)
+  values <- openxlsx::read.xlsx(FILE_PATH, sheet = "Values") %>%
+    mutate(Variable = tolower(Variable)) %>%
+    rename_all(tolower)
 
-  op_spec_var <- openxlsx::read.xlsx("K:/QILT/GOS/2022/May/5. Sample/2. Sample specs and design/GOS 2022 Operational Sample Spec.xlsx") %>% rename_all(tolower)
+  # Check if the exact match exists
+  exact_match <- var %in% variables$variable
 
-  mos_var <- openxlsx::read.xlsx("K:/QILT/GOS/2023/Overall/10. Outputs/Data files/Specs/GOS 2023 Master Output Spec.xlsx") %>% rename_all(tolower)
-  mos_val <- openxlsx::read.xlsx("K:/QILT/GOS/2023/Overall/10. Outputs/Data files/Specs/GOS 2023 Master Output Spec.xlsx", sheet = 2) %>% rename_all(tolower)
 
-  response_var <-  openxlsx::read.xlsx(str_glue("{WD}/lookup/qilt_vars_misc.xlsx"), sheet = "Variable")
-  response_val <-  openxlsx::read.xlsx(str_glue("{WD}/lookup/qilt_vars_misc.xlsx"), sheet = "Value")
+  if (exact_match) {
 
-  if (var %in% tolower(pop_spec_var$variable)) {
+    var_def <- variables %>%
+      filter(variable %in% {{var}}) %>%
+      select(variable, label, format, spec)
 
-    var_def <- pop_spec_var %>%
-      filter(tolower(variable) %in% {{var}}) %>%
-      select(variable, label, format)
-
-    var_val <- pop_spec_val %>%
-      filter(tolower(variable) %in% {{var}}) %>%
-      select(value, label)
-
-    var_info <- list(
-      Variable = as.list(var_def),
-      Value = var_val
-                     )
-
-    return(var_info)
-
-  } else if (var %in% tolower(op_spec_var$variable)) {
-
-    var_def <- op_spec_var %>%
-      filter(tolower(variable) %in% {{var}}) %>%
-      select(variable, "Variable Definition" = variable.label, format)
-    return(as.list(var_def))
-
-  } else if (var %in% tolower(mos_var$variable)) {
-
-    var_def <- mos_var %>%
-      filter(tolower(variable) %in% {{var}}) %>%
-      select(variable, "Variable Definition" = label, format)
-
-    var_val <- mos_val %>%
-      filter(tolower(variable) %in% {{var}}) %>%
-      select(value, label)
+    var_val <- values %>%
+      filter(variable %in% {{var}}) %>%
+      select(value, label, spec)
 
     var_info <- list(
       Variable = as.list(var_def),
@@ -69,27 +58,15 @@ lkp_var <- function(var) {
 
     return(var_info)
 
-  } else if (var %in% tolower(response_var$variable)) {
-
-
-
-    var_def <- response_var %>%
-      filter(tolower(variable) %in% {{var}}) %>%
-      select(variable, label)
-
-    var_val <- response_val %>%
-      filter(tolower(variable) %in% {{var}}) %>%
-      select(value, label)
-
-    var_info <- list(
-      Variable = as.list(var_def),
-      Value = var_val)
-
-    return(var_info)
-
 
   } else {
-    stop("Variable not found in any of the lookup files.")
+    # Find similar variables
+    similar_vars <- find_similar_variables(var, variables$variable)
+    if (length(similar_vars) > 0) {
+      message(paste("Variable not found in any of the lookup files. But similar variable(s) found:\n", paste(similar_vars, collapse = ", ")))
+    } else {
+      stop("Variable not found in any of the lookup files.")
+    }
   }
 }
 

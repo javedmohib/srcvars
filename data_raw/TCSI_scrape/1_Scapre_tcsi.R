@@ -172,7 +172,7 @@ addWorksheet(wb, "Variable")
 addWorksheet(wb, "Value")
 writeData(wb, "Variable", x = tcsi_vars)
 writeData(wb, "Value", x = tcsi_vals)
-saveWorkbook(wb, "data/1_tcsi_spec.xlsx", overwrite = TRUE)
+saveWorkbook(wb, "lookup/1_tcsi_spec.xlsx", overwrite = TRUE)
 
 
 #---

@@ -42,3 +42,19 @@ paste_pathr <- function() {
 }
 
 
+#' Open K drive from R session
+#'
+#' @param path
+#'
+#' @return
+#' @export
+#'
+#' @examples
+goto_k <- function(path = getwd()) {
+
+  # Replace the "Z:" drive with "K:"
+  path <- gsub("Z:/Consulting/Jobs", "K:", path)
+
+  # Run the shell.exec command using the current working directory
+  shell.exec(path)
+}

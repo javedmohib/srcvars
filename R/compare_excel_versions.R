@@ -7,8 +7,7 @@
 #' @return
 #' @export
 #' @import openxlsx
-#' @examples
-#' \dontrun compare_excel_files ("K:/QILT/GOS/2023/Overall/10. Outputs/Data files/Specs/archive/GOS 2022 Master Output Spec.xlsx", "K:/QILT/GOS/2023/Overall/10. Outputs/Data files/Specs/GOS 2023 Master Output Spec.xlsx", output_file = "example.xlsx", OVER_WRITE = TRUE)
+
 compare_excel_files <- function(old_version_path, new_version_path, output_file, OVER_WRITE = TRUE) {
   # Read in all sheet names from the old Excel version
   old_sheet_names <- getSheetNames(old_version_path)
@@ -40,19 +39,25 @@ compare_excel_files <- function(old_version_path, new_version_path, output_file,
     # Truncate sheet name if it's too long
     sheet_name_truncated <- substr(sheet_name, 1, 22)
 
-    # Add worksheets to the output workbook and write data
-    addWorksheet(output_workbook, paste0(sheet_name_truncated, "-ColDiff"))
-    writeData(output_workbook, paste0(sheet_name_truncated, "-ColDiff"), col_diffs)
-    addWorksheet(output_workbook, paste0(sheet_name_truncated, "-RowDiff"))
-    writeData(output_workbook, paste0(sheet_name_truncated, "-RowDiff"), row_diffs)
+    # Check if there are differences and write output only if there are
+    if (length(col_diffs) > 0) {
+      addWorksheet(output_workbook, paste0(sheet_name_truncated, "-ColDiff"))
+      writeData(output_workbook, paste0(sheet_name_truncated, "-ColDiff"), col_diffs)
+      print(paste0("Column comparison results for ", sheet_name, " written to output workbook"))
+    }
 
-    print(paste0("Comparison results for ", sheet_name, " written to output workbook"))
+    if (nrow(row_diffs) > 0) {
+      addWorksheet(output_workbook, paste0(sheet_name_truncated, "-RowDiff"))
+      writeData(output_workbook, paste0(sheet_name_truncated, "-RowDiff"), row_diffs)
+      print(paste0("Row comparison results for ", sheet_name, " written to output workbook"))
+    }
   }
 
   # Save the output workbook to a file
   saveWorkbook(output_workbook, output_file, overwrite = OVER_WRITE)
   print(paste0("Comparison results saved to file: ", output_file))
 }
+
 
 
 

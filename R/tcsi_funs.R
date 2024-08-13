@@ -1,9 +1,13 @@
 #' @title QILT TCSI functions
 #' @description These functions provide format checks for TCSI variables
-#' @param elm - A TCSI element
+#'
+#' @param elm A TCSI element
+#'
 #' @import stringr
 #' @import glue
+#'
 #' @return
+#' @rdname tcsi
 #' @export
 
 
@@ -17,9 +21,9 @@ tcsi_var <- function(elm) {
     stop(getOption("srcqilt.name"), ": `", elm, "` is not a valid tcsi element",
          call. = FALSE)
   } else{
-    WD <- "C:/Users/jmohib/MISC Work/Package Development/Helper Packages/srcvars"
-    tcsi_variables <- openxlsx::read.xlsx(str_glue("{WD}/data/1_tcsi_spec.xlsx"))
-    tcsi_values <-  openxlsx::read.xlsx(str_glue("{WD}/data/1_tcsi_spec.xlsx"), sheet = 2)
+
+    tcsi_variables <- openxlsx::read.xlsx("lookup/1_tcsi_spec.xlsx")
+    tcsi_values <-  openxlsx::read.xlsx("lookup/1_tcsi_spec.xlsx", sheet = 2)
 
     var_def <- tcsi_variables %>%
       filter(tolower(element) %in% {{elm}}) %>%
@@ -40,16 +44,19 @@ tcsi_var <- function(elm) {
 
 }
 
+#' @rdname tcsi
 #' @export
 is_tcsi <- function(elm) {
   if (!stringr::str_sub(elm, 1, 1) %in% c("e", "E")) {
     elm <- paste0("e", elm)
   }
-  WD <- "C:/Users/jmohib/MISC Work/Package Development/Helper Packages/srcvars"
-  tcsi_vars <- openxlsx::read.xlsx(str_glue("{WD}/data/1_tcsi_spec.xlsx"))
+
+  tcsi_vars <- openxlsx::read.xlsx("lookup/1_tcsi_spec.xlsx")
   tolower(elm) %in% tcsi_vars$element
 }
 
+
+#' @rdname tcsi
 #' @export
 
 tcsi_web <- function(elm) {

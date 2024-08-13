@@ -2,14 +2,18 @@
 % Please edit documentation in R/tcsi_funs.R
 \name{tcsi_var}
 \alias{tcsi_var}
+\alias{is_tcsi}
+\alias{tcsi_web}
 \title{QILT TCSI functions}
 \usage{
 tcsi_var(elm)
+
+is_tcsi(elm)
+
+tcsi_web(elm)
 }
 \arguments{
-\item{elm}{\itemize{
-\item A TCSI element
-}}
+\item{elm}{A TCSI element}
 }
 \value{
 

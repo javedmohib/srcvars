@@ -1,6 +1,6 @@
 Package: srcvars
 Title: Gives definition and labels of QILT variables
-Version: 0.4.4.9007
+Version: 0.0.0.9016
 Authors@R: 
     person(given = "Javed",
            family = "Mohib",
@@ -19,7 +19,9 @@ Imports:
     magrittr,
     openxlsx,
     stringr,
-    tibble
+    tibble,
+    here
+InstExtData: tcsi_spec.xlsx
 URL: https://github.com/javedmohib/srcvars
 BugReports: https://github.com/javedmohib/srcvars/issues
 Suggests: 

@@ -26,6 +26,3 @@ compare_excel_files(
 \description{
 Title Compare tro excel files and gives the differences in Column names and rows
 }
-\examples{
-\dontrun compare_excel_files ("K:/QILT/GOS/2023/Overall/10. Outputs/Data files/Specs/archive/GOS 2022 Master Output Spec.xlsx", "K:/QILT/GOS/2023/Overall/10. Outputs/Data files/Specs/GOS 2023 Master Output Spec.xlsx", output_file = "example.xlsx", OVER_WRITE = TRUE)
-}

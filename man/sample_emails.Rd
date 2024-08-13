@@ -30,6 +30,5 @@ sample_emails(df, ..., n = 10)
 Helper to check email mis-sort in sample processing
 }
 \examples{
-eval = FALSE
 \dontrun{sample_emails (df, n = 10)}
 }
